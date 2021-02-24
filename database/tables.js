@@ -1,5 +1,7 @@
 class Tables {
   init(connection) {
+    console.log('fala tu init')
+    console.log(connection)
     this.connection = connection;
 
     this.createUsers();
@@ -7,7 +9,7 @@ class Tables {
 
   createUsers() {
     const sql = `CREATE TABLE  IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT,
-            name VARCHAR(50) NOT NULL, password VARCHAR(30) NOT NULL,
+            name VARCHAR(50) NOT NULL, email VARCHAR(50) NOT NULL, password VARCHAR(30) NOT NULL,
             nick VARCHAR(50), primary key(id))`;
 
     this.connection.query(sql, (error) => {
