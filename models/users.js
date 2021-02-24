@@ -1,3 +1,4 @@
+const { query, connect } = require("../database/connection");
 const connection = require("../database/connection");
 const { createUsers } = require("../database/tables");
 
@@ -26,14 +27,44 @@ class Users {
 
     connection.query(sql, (error, list) => {
       if (error) {
-        console.log(error)
+        console.log(error);
         res.status(400).json(error);
       } else {
-        console.log(list)
         res.status(200).json(list);
       }
     });
   }
+
+  listById(id, res) {
+    const sql = `SELECT * FROM users WHERE id =${id}`;
+
+    connection.query(sql, (error, results) => {
+      const searchById = results[0];
+      if (error) {
+        res.status(400).json(error);
+      } else {
+        console.log(searchById);
+        res.status(200).json(searchById);
+      }
+    });
+  }
+
+  alterUser(id, fields, res){
+
+    const sql = `UPDATE users SET ? WHERE id = ?`
+
+    connection.query(sql, [fields, id], (error, results)=>{
+      if(error){
+        res.status(400).json(error)
+      }else{
+        res.status(200).json(results)
+      }
+    })
+  }
+  
+
+
+
 }
 
 module.exports = new Users();
