@@ -20,6 +20,20 @@ class Users {
       }
     });
   }
+
+  listUsers(res) {
+    const sql = `SELECT * FROM users`;
+
+    connection.query(sql, (error, list) => {
+      if (error) {
+        console.log(error)
+        res.status(400).json(error);
+      } else {
+        console.log(list)
+        res.status(200).json(list);
+      }
+    });
+  }
 }
 
 module.exports = new Users();
