@@ -1,3 +1,4 @@
+const { Router } = require("express");
 const express = require("express");
 const { listById } = require("../models/users");
 const users = require("../models/users");
@@ -18,11 +19,17 @@ router.get("/list/:id", (req, res) => {
   users.listById(id, res);
 });
 //PATCH users alter user
-router.patch("/edit/:id",(req, res)=>{
-  const id = parseInt(req.params.id)
-  const fields = req.body
-  
-  users.alterUser(id, fields, res)
-})
+router.patch("/edit/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const fields = req.body;
+
+  users.alterUser(id, fields, res);
+});
+
+//DELETE users
+router.delete("/delete/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  users.deleteUser(id, res);
+});
 
 module.exports = router;
