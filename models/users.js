@@ -1,27 +1,22 @@
 const connection = require("../database/connection");
 const { createUsers } = require("../database/tables");
-const router = require("../routes");
 
 class Users {
-  constructor(user, res) {
+  createUsers(user, res) {
     const query = "INSERT INTO users SET ?";
+    const newUser = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      nick: user.nick,
+    };
 
-    createUsers(user.name, user.email, user.password, user.nick, (error) => {
-      if (error) {
-        res.status(400).json(error);
+    connection.query(query, newUser, (erro) => {
+      if (erro) {
+        console.log(erro);
+        res.status(400).json(erro);
       } else {
-        const newUser = {
-          name: user.name,
-          email: user.email,
-          password: user.password,
-          nick: user.nick,
-        };
-        if (error) {
-          console.log(error);
-          res.status(400).json(error);
-        } else {
-          res.status(200).json(newUser);
-        }
+        res.status(200).json(newUser);
       }
     });
   }

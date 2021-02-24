@@ -1,9 +1,6 @@
 class Tables {
   init(connection) {
-    console.log('fala tu init')
-    console.log(connection)
     this.connection = connection;
-
     this.createUsers();
   }
 
@@ -12,13 +9,13 @@ class Tables {
             name VARCHAR(50) NOT NULL, email VARCHAR(50) NOT NULL, password VARCHAR(30) NOT NULL,
             nick VARCHAR(50), primary key(id))`;
 
-    this.connection.query(sql, (error) => {
+    /*connection.query(sql, (error) => {
       if (error) {
         console.log(error);
       } else {
         console.log("tabela criada com sucesso");
       }
-    });
+    });*/
   }
 }
 

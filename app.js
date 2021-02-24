@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
+
 connection.connect((error) => {
   if (error) {
     console.log(error);

@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const users = require('../models/users');
+const router = express.Router();
 
 //POST users
-router.post('/', function(req, res, next){
-  res.send(req.body)
+router.post('/create', function(req, res, next){
+  users.createUsers(req.body, res)
 })
 
 
